@@ -25,7 +25,7 @@ enum Commands {
     /// Seal a kernel configuration
     Seal {
         /// Path to kernel JSON file
-        #[arg(short, long)]
+        #[arg(short = 'i', long)]
         kernel: PathBuf,
 
         /// Path to secret key file
