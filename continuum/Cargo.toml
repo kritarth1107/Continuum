@@ -4,7 +4,11 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
 description = "Portable judgment kernel + continuity seal for agent identity persistence"
+readme = "../README.md"
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }

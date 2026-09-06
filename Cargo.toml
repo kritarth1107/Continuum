@@ -7,6 +7,9 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/kritarth1107/Continuum"
+homepage = "https://github.com/kritarth1107/Continuum"
+keywords = ["agent", "identity", "cryptography", "seal", "kernel"]
+categories = ["cryptography", "authentication"]
 
 [workspace.dependencies]
 zeroize = ">=1.5,<1.8"
