@@ -1,0 +1,14 @@
+[workspace]
+resolver = "2"
+members = ["continuum", "continuum-cli"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/kritarth1107/Continuum"
+
+[workspace.dependencies]
+zeroize = ">=1.5,<1.8"
+getrandom = { version = ">=0.2,<0.3", features = ["std"] }
+base64ct = ">=1.5,<1.7"
