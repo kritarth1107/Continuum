@@ -233,9 +233,18 @@ mod runtime_guard {
         ]);
         guard.load_packet(packet).unwrap();
 
-        assert_eq!(guard.check_access("trusted_tool").unwrap(), TrustLevel::Trusted);
-        assert_eq!(guard.check_access("restricted_tool").unwrap(), TrustLevel::Restricted);
-        assert_eq!(guard.check_access("unknown_tool").unwrap(), TrustLevel::Standard);
+        assert_eq!(
+            guard.check_access("trusted_tool").unwrap(),
+            TrustLevel::Trusted
+        );
+        assert_eq!(
+            guard.check_access("restricted_tool").unwrap(),
+            TrustLevel::Restricted
+        );
+        assert_eq!(
+            guard.check_access("unknown_tool").unwrap(),
+            TrustLevel::Standard
+        );
     }
 
     #[test]

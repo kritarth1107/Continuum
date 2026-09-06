@@ -7,13 +7,15 @@ use std::path::PathBuf;
 #[derive(Parser)]
 #[command(name = "continuum")]
 #[command(about = "Portable judgment kernel + continuity seal for agent identity")]
-#[command(long_about = "Continuum provides cryptographic sealing for agent judgment parameters.\n\n\
+#[command(
+    long_about = "Continuum provides cryptographic sealing for agent judgment parameters.\n\n\
     Use this tool to:\n  \
     - Generate Ed25519 signing keys\n  \
     - Seal kernels with cryptographic signatures\n  \
     - Verify handoff packets haven't been tampered with\n  \
     - Create auditable diff receipts for kernel changes\n\n\
-    See https://github.com/kritarth1107/Continuum for documentation.")]
+    See https://github.com/kritarth1107/Continuum for documentation."
+)]
 #[command(version)]
 struct Cli {
     #[command(subcommand)]

@@ -46,7 +46,9 @@ fn main() {
 
     // Load the verified packet into the guard
     println!("\n3. Loading verified handoff packet...");
-    guard.load_packet(packet).expect("packet verification failed");
+    guard
+        .load_packet(packet)
+        .expect("packet verification failed");
     println!("   Packet loaded and verified!");
 
     // Now tool access works (subject to trust levels)
