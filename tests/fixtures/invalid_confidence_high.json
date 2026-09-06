@@ -1,0 +1,11 @@
+{
+  "schema_version": "0",
+  "name": "invalid_confidence",
+  "risk_appetite": "moderate",
+  "escalation_rules": [],
+  "spend_ceiling_usd": 100.0,
+  "refusal_classes": [],
+  "confidence_threshold": 1.5,
+  "tool_trust": {},
+  "citation_bar": "disputed"
+}

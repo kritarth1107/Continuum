@@ -1,0 +1,55 @@
+{
+  "schema_version": "0",
+  "name": "maximal",
+  "description": "Fully populated kernel with all optional fields and complex configurations",
+  "risk_appetite": "maximum",
+  "escalation_rules": [
+    {
+      "name": "cost_limit",
+      "trigger": { "cost_exceeds": { "usd": 1000.0 } },
+      "action": "require_approval"
+    },
+    {
+      "name": "low_confidence",
+      "trigger": { "confidence_below": { "threshold": 0.5 } },
+      "action": "abort"
+    },
+    {
+      "name": "sensitive_domains",
+      "trigger": { "domain_match": { "domains": ["finance", "legal", "hr"] } },
+      "action": { "reduce_scope": { "max_iterations": 5 } }
+    },
+    {
+      "name": "external_calls",
+      "trigger": { "external_api_calls": { "max_count": 100 } },
+      "action": "notify_and_continue"
+    },
+    {
+      "name": "irreversible_ops",
+      "trigger": "irreversible_action",
+      "action": "require_approval"
+    }
+  ],
+  "spend_ceiling_usd": 10000.0,
+  "refusal_classes": [
+    "harmful_content",
+    "safety_override",
+    "unauthorized_financial",
+    "out_of_scope_access",
+    "impersonation",
+    "system_disclosure",
+    "irreversible_without_approval",
+    { "custom": "proprietary_data_leak" }
+  ],
+  "confidence_threshold": 0.95,
+  "tool_trust": {
+    "file_read": "trusted",
+    "file_write": "standard",
+    "file_delete": "requires_approval",
+    "shell_exec": "blocked",
+    "http_request": "restricted",
+    "database_read": "trusted",
+    "database_write": "requires_approval"
+  },
+  "citation_bar": "academic"
+}
