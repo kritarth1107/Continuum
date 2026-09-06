@@ -15,7 +15,7 @@ pub mod seal;
 pub use diff::DiffReceipt;
 pub use error::ContinuumError;
 pub use handoff::{HandoffPacket, RuntimeGuard};
-pub use kernel::Kernel;
+pub use kernel::{Kernel, RiskAppetite, TrustLevel};
 pub use seal::{ContinuitySeal, KeyPair};
 
 pub type Result<T> = std::result::Result<T, ContinuumError>;
