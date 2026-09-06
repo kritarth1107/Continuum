@@ -1,6 +1,13 @@
 # Continuum
 
+[![CI](https://github.com/kritarth1107/Continuum/actions/workflows/ci.yml/badge.svg)](https://github.com/kritarth1107/Continuum/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 Portable judgment kernel + continuity seal so an agent identity survives model swaps.
+
+## Status
+
+**v0.1.0** — Initial release. Core primitives are stable: kernel schema v0, seal/verify, handoff packets, diff receipts, and RuntimeGuard. API may evolve in future minor releases.
 
 ## What is Continuum?
 
@@ -52,7 +59,7 @@ See [docs/KERNEL_V0.md](docs/KERNEL_V0.md) for the complete specification.
 Three pre-built templates for common use cases:
 
 - **conservative_ops**: Production environments with strict safety guardrails
-- **aggressive_research**: Exploratory work with higher autonomy  
+- **aggressive_research**: Exploratory work with higher autonomy
 - **customer_support**: Optimized for helpful, safe customer interactions
 
 ```bash
@@ -98,7 +105,7 @@ Signature: a1b2c3d4...
 
 ## Runtime Guard
 
-The `RuntimeGuard` enforces "refuse until loaded" semantics:
+The `RuntimeGuard` enforces "refuse until loaded" semantics—tools are locked until a verified handoff packet is loaded:
 
 ```rust
 use continuum::{RuntimeGuard, HandoffPacket};
@@ -113,6 +120,12 @@ guard.load_packet(packet)?;
 
 // Now tools are accessible (subject to trust levels)
 let trust = guard.check_access("file_write")?;
+```
+
+See the [refuse_until_loaded](continuum/examples/refuse_until_loaded.rs) example for a complete walkthrough:
+
+```bash
+cargo run --example refuse_until_loaded
 ```
 
 ## Installation
@@ -139,7 +152,7 @@ continuum = "0.1"
 ```
 
 ```rust
-use continuum::{Kernel, KeyPair, ContinuitySeal, HandoffPacket};
+use continuum::{Kernel, KeyPair, ContinuitySeal, HandoffPacket, RiskAppetite};
 
 // Create a kernel
 let mut kernel = Kernel::new("my-agent");
@@ -154,6 +167,14 @@ let packet = HandoffPacket::new(kernel, seal);
 // Verify
 assert!(packet.verify()?);
 ```
+
+## Documentation
+
+- [Kernel Schema v0](docs/KERNEL_V0.md) — Complete field specification
+- [Threat Model](docs/THREAT_MODEL.md) — Security analysis and assumptions
+- [WASM Notes](docs/WASM.md) — WebAssembly portability considerations
+- [Contributing](CONTRIBUTING.md) — Development guidelines
+- [Security Policy](SECURITY.md) — Vulnerability reporting
 
 ## License
 
