@@ -22,7 +22,7 @@ continuum keygen -o my-agent.key
 continuum init -t conservative_ops -o kernel.json
 
 # Seal the kernel (creates a handoff packet)
-continuum seal -k kernel.json -k my-agent.key -o packet.json
+continuum seal -i kernel.json -k my-agent.key -o packet.json
 
 # Verify a packet
 continuum verify -p packet.json -v
@@ -67,7 +67,7 @@ Each kernel is sealed with:
 
 ```bash
 # Create sealed handoff packet
-continuum seal -k kernel.json -k my-agent.key -o packet.json
+continuum seal -i kernel.json -k my-agent.key -o packet.json
 
 # Verify the seal
 continuum verify -p packet.json
