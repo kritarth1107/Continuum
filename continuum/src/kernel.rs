@@ -2,12 +2,13 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 /// Risk appetite levels for agent decision-making
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum RiskAppetite {
     /// Minimal risk tolerance - prefer inaction over uncertain outcomes
     Minimal,
     /// Conservative - only proceed with high confidence actions
+    #[default]
     Conservative,
     /// Moderate - balanced risk/reward assessment
     Moderate,
@@ -15,12 +16,6 @@ pub enum RiskAppetite {
     Aggressive,
     /// Maximum - optimize for speed/results, accept significant uncertainty
     Maximum,
-}
-
-impl Default for RiskAppetite {
-    fn default() -> Self {
-        Self::Conservative
-    }
 }
 
 /// Escalation trigger conditions
@@ -86,7 +81,7 @@ pub enum RefusalClass {
 }
 
 /// Trust level for tool categories
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Default, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum TrustLevel {
     /// Tool is blocked entirely
@@ -96,24 +91,20 @@ pub enum TrustLevel {
     /// Can use with logging and rate limits
     Restricted,
     /// Standard access with normal logging
+    #[default]
     Standard,
     /// Full access with minimal oversight
     Trusted,
 }
 
-impl Default for TrustLevel {
-    fn default() -> Self {
-        Self::Standard
-    }
-}
-
 /// Citation requirements for claims
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum CitationBar {
     /// No citations required
     None,
     /// Cite only for factual claims that could be disputed
+    #[default]
     Disputed,
     /// Cite for all factual claims
     AllFacts,
@@ -121,12 +112,6 @@ pub enum CitationBar {
     PrimarySourcesOnly,
     /// Academic-level citation for all substantive claims
     Academic,
-}
-
-impl Default for CitationBar {
-    fn default() -> Self {
-        Self::Disputed
-    }
 }
 
 /// Kernel v0: Core judgment parameters for an agent identity
