@@ -28,7 +28,7 @@ fn bench_sha256_hash(c: &mut Criterion) {
 
 fn bench_keypair_generation(c: &mut Criterion) {
     c.bench_function("keypair_generate", |b| {
-        b.iter(|| KeyPair::generate())
+        b.iter(KeyPair::generate)
     });
 }
 
