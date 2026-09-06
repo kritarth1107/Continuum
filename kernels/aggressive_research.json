@@ -1,0 +1,46 @@
+{
+  "schema_version": "0",
+  "name": "aggressive_research",
+  "description": "Aggressive research kernel for exploratory work with higher autonomy",
+  "risk_appetite": "aggressive",
+  "escalation_rules": [
+    {
+      "name": "high_cost",
+      "trigger": {
+        "cost_exceeds": {
+          "usd": 100.0
+        }
+      },
+      "action": "notify_and_continue"
+    },
+    {
+      "name": "very_low_confidence",
+      "trigger": {
+        "confidence_below": {
+          "threshold": 0.4
+        }
+      },
+      "action": {
+        "reduce_scope": {
+          "max_iterations": 3
+        }
+      }
+    }
+  ],
+  "spend_ceiling_usd": 500.0,
+  "refusal_classes": [
+    "harmful_content",
+    "safety_override",
+    "impersonation"
+  ],
+  "confidence_threshold": 0.6,
+  "tool_trust": {
+    "file_delete": "standard",
+    "database_write": "restricted",
+    "file_read": "trusted",
+    "file_write": "trusted",
+    "shell_exec": "standard",
+    "http_request": "trusted"
+  },
+  "citation_bar": "disputed"
+}

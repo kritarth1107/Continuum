@@ -1,0 +1,62 @@
+{
+  "schema_version": "0",
+  "name": "customer_support",
+  "description": "Customer support kernel optimized for helpful, safe interactions",
+  "risk_appetite": "moderate",
+  "escalation_rules": [
+    {
+      "name": "refund_request",
+      "trigger": {
+        "domain_match": {
+          "domains": [
+            "refund",
+            "billing"
+          ]
+        }
+      },
+      "action": "require_approval"
+    },
+    {
+      "name": "account_changes",
+      "trigger": {
+        "domain_match": {
+          "domains": [
+            "account_delete",
+            "password_reset"
+          ]
+        }
+      },
+      "action": "require_approval"
+    },
+    {
+      "name": "low_confidence",
+      "trigger": {
+        "confidence_below": {
+          "threshold": 0.6
+        }
+      },
+      "action": "notify_and_continue"
+    }
+  ],
+  "spend_ceiling_usd": 0.0,
+  "refusal_classes": [
+    "harmful_content",
+    "safety_override",
+    "unauthorized_financial",
+    "impersonation",
+    "system_disclosure",
+    {
+      "custom": "competitor_discussion"
+    }
+  ],
+  "confidence_threshold": 0.75,
+  "tool_trust": {
+    "ticket_update": "standard",
+    "refund_process": "requires_approval",
+    "account_modify": "blocked",
+    "ticket_create": "standard",
+    "knowledge_base": "trusted",
+    "customer_lookup": "restricted"
+  },
+  "citation_bar": "disputed"
+}

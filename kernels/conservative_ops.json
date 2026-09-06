@@ -1,0 +1,51 @@
+{
+  "schema_version": "0",
+  "name": "conservative_ops",
+  "description": "Conservative operations kernel for production environments with strict safety guardrails",
+  "risk_appetite": "conservative",
+  "escalation_rules": [
+    {
+      "name": "cost_limit",
+      "trigger": {
+        "cost_exceeds": {
+          "usd": 5.0
+        }
+      },
+      "action": "require_approval"
+    },
+    {
+      "name": "low_confidence",
+      "trigger": {
+        "confidence_below": {
+          "threshold": 0.85
+        }
+      },
+      "action": "require_approval"
+    },
+    {
+      "name": "irreversible",
+      "trigger": "irreversible_action",
+      "action": "require_approval"
+    }
+  ],
+  "spend_ceiling_usd": 10.0,
+  "refusal_classes": [
+    "harmful_content",
+    "safety_override",
+    "unauthorized_financial",
+    "out_of_scope_access",
+    "impersonation",
+    "system_disclosure",
+    "irreversible_without_approval"
+  ],
+  "confidence_threshold": 0.9,
+  "tool_trust": {
+    "http_request": "restricted",
+    "database_write": "requires_approval",
+    "file_write": "restricted",
+    "file_read": "standard",
+    "shell_exec": "requires_approval",
+    "file_delete": "requires_approval"
+  },
+  "citation_bar": "all_facts"
+}
