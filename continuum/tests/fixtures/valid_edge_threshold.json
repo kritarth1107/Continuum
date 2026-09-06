@@ -1,0 +1,20 @@
+{
+  "schema_version": "0",
+  "name": "edge_threshold",
+  "description": "Tests edge case: confidence_threshold at exact boundary values",
+  "risk_appetite": "minimal",
+  "escalation_rules": [
+    {
+      "name": "always_escalate",
+      "trigger": "always",
+      "action": "require_approval"
+    }
+  ],
+  "spend_ceiling_usd": 0.0,
+  "refusal_classes": [
+    "harmful_content"
+  ],
+  "confidence_threshold": 1.0,
+  "tool_trust": {},
+  "citation_bar": "primary_sources_only"
+}

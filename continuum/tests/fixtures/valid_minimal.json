@@ -1,0 +1,11 @@
+{
+  "schema_version": "0",
+  "name": "minimal",
+  "risk_appetite": "conservative",
+  "escalation_rules": [],
+  "spend_ceiling_usd": 0.0,
+  "refusal_classes": [],
+  "confidence_threshold": 0.8,
+  "tool_trust": {},
+  "citation_bar": "none"
+}
