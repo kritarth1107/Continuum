@@ -26,5 +26,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `aggressive_research` - Exploratory work with higher autonomy
   - `customer_support` - Helpful, safe customer interactions
 - CLI with commands: `keygen`, `seal`, `verify`, `diff`, `verify-diff`, `hash`, `init`, `show`
-- Comprehensive test suite
+- Comprehensive test suite with fixture-based validation tests
+- Criterion benchmarks for cryptographic hot paths
+- Documentation:
+  - SECURITY.md with vulnerability reporting policy
+  - THREAT_MODEL.md with security analysis
+  - CONTRIBUTING.md with development guidelines
+  - WASM.md with portability notes
+- Test fixtures for edge-case kernel validation
+- CI workflow with format, clippy, test, and benchmark checks
 - MIT License
