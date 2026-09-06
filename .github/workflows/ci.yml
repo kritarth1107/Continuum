@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo check --all-targets
+
+  fmt:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - run: cargo fmt --all -- --check
+
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo clippy --all-targets -- -D warnings
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test --all
+
+  cli:
+    name: CLI Integration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo build --release
+      - name: Test CLI workflow
+        run: |
+          # Generate a key pair
+          ./target/release/continuum keygen -o test.key
+          
+          # Initialize a kernel from template
+          ./target/release/continuum init -t conservative_ops -o kernel.json
+          
+          # Seal the kernel
+          ./target/release/continuum seal -k kernel.json -k test.key -o packet.json
+          
+          # Verify the packet
+          ./target/release/continuum verify -p packet.json -v
+          
+          # Show the packet
+          ./target/release/continuum show packet.json
+          
+          # Create a modified kernel and test diff
+          ./target/release/continuum init -t aggressive_research -o kernel2.json
+          ./target/release/continuum seal -k kernel2.json -k test.key -o packet2.json
+          ./target/release/continuum diff --old packet.json --new packet2.json -k test.key -o diff.json
+          ./target/release/continuum verify-diff -r diff.json
